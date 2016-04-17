@@ -138,6 +138,10 @@ if __FILE__ == $PROGRAM_NAME
 		if flow_result["flowOutput"]
 			flow_result["flowOutput"].each { |key,value| puts "#{key}=#{value}" }
 		end
+		
+		if status
+			puts "Status=#{status}"
+		end
 	end
 
 	exit if status == 'RESOLVED'
