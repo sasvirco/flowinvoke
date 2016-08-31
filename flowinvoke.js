@@ -6,7 +6,7 @@
 // do not use sync-request for servers
 
 //main
-opt = require('node-getopt').create([
+var opt = require('node-getopt').create([
   ['' , 'user=ARG', 'username (default: admin)'],
   ['' , 'password=ARG', 'password for the user (default: admin)'],
   ['' , 'host=ARG', 'The hostname of OO server. Should include port also'],
@@ -37,6 +37,7 @@ var uuid = opt.options.uuid ,
 	flow_result,
 	a,
 	i,
+	len,
 	authorization;
 
 if (opt.options.encode) {
@@ -117,7 +118,8 @@ function run_flow(session, uuid, input) {
 		run_name,
 		res,
 		url,
-		run_name;
+		run_name,
+		i;
 
 	//collect flow information	
 	url = "https://"+ session.url + "/oo/rest/v1/flows/" + uuid,
