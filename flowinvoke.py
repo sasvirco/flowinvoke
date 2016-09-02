@@ -34,7 +34,7 @@ def main () :
 					   (repeat for more inputs e.g. --input key1=value1 --input key2=value2)''')
 	parser.add_argument('--timeout', default = 3600, type = int, help='The time to wait for flow completion in seconds (Default: 3600 - 1hour)')
 	parser.add_argument('--heartbeat', default = 120, type = int, help='Operation Orchestration polling interval (Default: 120 secs)')
-	parser.add_argument('--async', default = False, help='''Run the flow in asynchronous mode (don't wait for the end result Default: synchronous)''')
+	parser.add_argument('--async', action = 'store_true', help='''Run the flow in asynchronous mode (don't wait for the end result Default: synchronous)''')
 	parser.add_argument('--verbose', action='store_true', help='''By default only the flow Result is printed. Verbose will print json object that contains
 					   also the flow execution summary and all bound inputs''')
 	parser.add_argument('--credentials', help='Use the encoded output of --encode to connect to OO instead of using the --user and --password option.')
