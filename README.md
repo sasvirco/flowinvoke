@@ -1,19 +1,19 @@
 # flowinvoke
 Operation Orchestration tool for running flows 
-##Introduction
+## Introduction
  
 This script provides the ability to execute an HP Operation Orchestration flow
 (http://www8.hp.com/uk/en/software-solutions/operations-orchestration-it-process-automation/) in a synchronous or asynchronous way using the rest api.
  
 Script is written in perl and tested under Linux (Ubuntu) and Windows. It uses LWP and JSON to speak with the OO server, and has some command line options that allows you to specify credentials, server, flow inputs and flow uuid. There are versions in other languages, that keep the same logic and input parameters for compatibility.
  
-##Installation
+## Installation
  
-###Windows
+### Windows
  
 On windows you need ActiveState perl. After installation, start the PPM (Perl Package Manager) and install LWP and JSON.
  
-###Linux
+### Linux
  
 Depending on your distribution you can either search your repository for lwp and json or install it through CPAN. For ubuntu that means installing with apt-get 2 packages.
 
@@ -64,7 +64,7 @@ bash$
 
 That will print at the end if successful the flow outputs in a key=value pairs, suitable for shell parsing. In case you want more verbose output you can include the --verbose option, which will print instead a JSON string with the execution-log.
  
-##Verbose Output:
+## Verbose Output:
 
 ```
 bash$./flowinvoke.pl --host core-oo.pslab.hp.com:8443 --input port=25 --input domain=hp.com --uuid 13dbf004-c88f-4ef6-b743-a5c6cc65d8bc --input host=10.10.0.1 --password opsware --verbose --user admin
@@ -135,7 +135,7 @@ bash$
 
 If you have noticed already, the username and password are supplied on the command line. That is not nice really, so there is a way to hide them by providing the --credentials option. Credentials is an encoded string, which is used to connect to the API, and consist of both your username and password in encoded form. To encode first your credentials run the script with --encode option:
  
-##Encode Credentials
+## Encode Credentials
 
  ```
 bash$./flowinvoke.pl --encode sas:sas
@@ -149,7 +149,7 @@ The string is the sas:sas (username:password) string encoded. Now I can remove t
 bash$./flowinvoke.pl --host core-oo.pslab.hp.com:8443 --uuid 13dbf004-c88f-4ef6-b743-a5c6cc65d8bc --input host=10.10.0.1 --input domain=hp.com--verbose --credentials c2FzOnNhcw==
 ```
  
-##Providing Input
+## Providing Input
  
 Input is provided through the --input option. If multiple inputs are required, the --input has to be specified for every key=value pair.
  
@@ -159,13 +159,13 @@ Input is provided through the --input option. If multiple inputs are required, t
  
 In the above example the flow requires 2 inputs - host and domain.
  
-##Timeout, Heartbeat and Async
+## Timeout, Heartbeat and Async
  
 There are 3 options with which you can control the script execution. Timeout is the total time to wait for flow to finish. The default value is 1 hour, so if your flow takes more than one hour to finish, you have to change that one.
 The heartbeat on the other side is how often the script checks the flow status during execution. The default value is 2 minutes. You can decrease that if you expect your flow to finish in just seconds.
 Script usually runs synchronously - e.g. runs a flow, checks the heartbeat time to finish until the timeout runs out and displays the result. If you use async option, it will run the flow and exit without waiting for the end result.
 
-##Errors
+## Errors
 The script will exit with non-zero status and error message unless it is not a confirmed successful run plus the following cases:
  
 - The usual authentication problems - e.g. username, password is wrong
@@ -173,6 +173,6 @@ The script will exit with non-zero status and error message unless it is not a c
 - The flow has a required input, but that has not been specified (Note that there are non-required flow inputs, that have no value assigned and Prompt you for input, in that case the flow will be in PAUSED state and exit with error)
  
 
-##Known Issues
+## Known Issues
  
 - When using --credentials, sometimes they end with ==. This might cause problems, when other input follows after (e.g redirect of the ouptut to a file with > flowoutput). To avoid that problem, make sure credentials is not your last input parameter or put the password in quotes.
