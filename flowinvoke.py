@@ -7,7 +7,7 @@ import argparse
 import requests
 import requests.packages.urllib3
 import time
-from base64 import encodestring
+from base64 import encodestring, b64enocde
 
 
 def main () :
@@ -53,12 +53,12 @@ def main () :
 	root = logging.getLogger()
 
 	if (args.encode is not None) :
-		print encodestring(args.encode)
+		print b64enocde(args.encode)
 
 	if (args.credentials is not None) :
 		authorization = 'Basic '+ args.credentials
 	else :
-		authorization = "Basic "+ encodestring(args.user+ ":" +args.password)
+		authorization = "Basic "+ b64enocde(args.user+ ":" +args.password)
 
 	if (args.uuid is None) :
 		parser.print_help()
